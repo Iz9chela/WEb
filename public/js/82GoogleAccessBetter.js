@@ -2,18 +2,7 @@ let auth2 = {};
 
 function renderUserInfo(googleUser, htmlElmId) {
     const profile = googleUser.getBasicProfile();
-    const htmlStringSk=
-        `
-            <p>Používateľ prihlásený</p>
-            <ul>
-                <li> ID: ${profile.getId()}
-                <li>  Plné meno: ${profile.getName()}
-                <li>  Krstné meno: ${profile.getGivenName()}
-                <li>  Priezvisko: ${profile.getFamilyName()}
-                <li>  URL obrázka: ${profile.getImageUrl()}
-                <li>  Email: ${profile.getEmail()}
-            </ul>
-        `;
+
     const htmlStringEn=
         `
             <p>User logged in.</p>
@@ -26,39 +15,19 @@ function renderUserInfo(googleUser, htmlElmId) {
                 <li>  Email: ${profile.getEmail()}
             </ul>
         `;
-    //Id z profile.getId() sa nema pouzivat na komunikaciu s vlastnym serverom (you should not use the id from profile.getId() for communication with your server)
-    document.getElementById(htmlElmId).innerHTML=htmlStringSk+htmlStringEn;
+  
+    document.getElementById(htmlElmId).innerHTML=htmlStringEn;//generatr u inform after connect
 }
 
-function renderLogOutInfo(htmlElmId) {
-    const htmlString=
-        `
-                <p>Používateľ nie je prihlásený</p>
-                <p>User not signed in</p>
-                `;
-    document.getElementById(htmlElmId).innerHTML=htmlString;
-}
-
-function signOut() {
-    if(auth2.signOut){
-        auth2.signOut();
-    }
-    if(auth2.disconnect){
-        auth2.disconnect();
-    }
-}
 
 function userChanged(user){
     document.getElementById("userName").innerHTML=user.getBasicProfile().getName();
 
 
     const userInfoElm = document.getElementById("userStatus");
-    const userNameInputElm = document.getElementById("author");
 
-    if(userInfoElm ){// pre/for 82GoogleAccessBetter.html
+    if(userInfoElm ){
         renderUserInfo(user,"userStatus");
-    }else if (userNameInputElm){// pre 82GoogleAccessBetterAddArt.html
-            userNameInputElm.value=user.getBasicProfile().getName();
     }
 
 }
@@ -76,19 +45,10 @@ function updateSignIn() {
     }
 
     const userInfoElm = document.getElementById("userStatus");
-    const userNameInputElm = document.getElementById("author");
 
-    if(userInfoElm){// pre/for 82GoogleAccessBetter.html
+    if(userInfoElm){
         if (sgnd) {
-            renderUserInfo(auth2.currentUser.get(),"userStatus");
-        }else{
-            renderLogOutInfo("userStatus");
-        }
-    }else if (userNameInputElm){// pre/for 82GoogleAccessBetterAddArt.html
-        if (sgnd) {
-            userNameInputElm.value=auth2.currentUser.get().getBasicProfile().getName();
-        }else{
-            userNameInputElm.value="";
+            renderUserInfo(auth2.currentUser.get(),"userStatus");// update User status
         }
     }
 
@@ -104,13 +64,13 @@ function startGSingIn() {
             'onsuccess': onSuccess,
             'onfailure': onFailure
         });
-        gapi.auth2.init().then( //zavolat po inicializácii OAuth 2.0  (called after OAuth 2.0 initialisation)
+        gapi.auth2.init().then( //vyzov button for connect google
             function (){
                 console.log('init');
                 auth2 = gapi.auth2.getAuthInstance();
                 auth2.currentUser.listen(userChanged);
                 auth2.isSignedIn.listen(updateSignIn);
-                auth2.then(updateSignIn); //tiez po inicializacii (later after initialisation)
+                auth2.then(updateSignIn);
             });
     });
 
