@@ -186,3 +186,7 @@ label.required:after
     display: flex;
     justify-content: center;
 }
+
+#newID{
+    text-align: center;
+}
