@@ -1,5 +1,5 @@
 # Projekt 2 z webových technológií / Web Technologies Project 2
-
+.
 Webová aplikácia dynamického blogu.
 
 Dynamic blog web application. 
