@@ -181,3 +181,8 @@ label.required:after
     display: flex;
     justify-content: center;
 }
+
+#userStatus{
+    display: flex;
+    justify-content: center;
+}
