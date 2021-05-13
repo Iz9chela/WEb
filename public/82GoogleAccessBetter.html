@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="google-signin-client_id" content="739447374919-iij0b3qqlnaa4eidj70m2k543n4j3675.apps.googleusercontent.com">-->
+    <meta name="google-signin-client_id" content="1029678842004-cgp7r7hb11lbl8qm0t5cg7576944sea5.apps.googleusercontent.com">
+    <title>Stránka s prihlásením / Page wih Sign In</title>
+    <link rel="stylesheet" href="css/normalize.css" media="screen" />
+    <link rel="stylesheet"
+          href="css/blogStyleBasic.css"
+          media="screen" />
+
+</head>
+<body>
+
+<aside id="googleSignIn">
+    <div id="SignInButton"></div>
+    <div id="SignedIn">
+        Ste prihlásený ako (You are signed in as) <span id="userName"></span> <button onclick="signOut()">Odhlásiť sa / Sign Out</button>
+    </div>
+</aside>
+
+
+<h1>Stránka s prihlásením / Page wih Sign In</h1>
+<p>
+    Na túto stránku sa môžete príhlásiť cez Google účet (vpravo hore).
+</p>
+<p>
+    You can log in to this page using Google account (in the top right corner).
+</p>
+
+
+<a href="82GoogleAccessBetterAddArt.html">Pridať príspevok / Add article</a>
+
+
+<h2>Informácia o prihlásenom používateľovi / Signed in User Info</h2>
+<div id="userStatus"></div>
+
+
+
+<script src="js/82GoogleAccessBetter.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=startGSingIn" async defer></script>
+</body>
+</html>
