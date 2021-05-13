@@ -190,3 +190,8 @@ label.required:after
 #newID{
     text-align: center;
 }
+
+.hiddenElm {display:none;}
+
+
+.showElm {display:block;}
