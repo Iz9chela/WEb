@@ -258,8 +258,10 @@ function fetchAndProcessArticle(
                         responseJSON
                     ); //added
 
-                    document.getElementById('comment_author').value
-                        = auth2.currentUser.get().getBasicProfile().getName();
+                    if(auth2.isSignedIn.get()) {
+                        document.getElementById('comment_author').value
+                            = auth2.currentUser.get().getBasicProfile().getName();
+                    }
 
                     document.getElementById('add_comment').onclick = () => {
                         addComment(artIdFromHash,
