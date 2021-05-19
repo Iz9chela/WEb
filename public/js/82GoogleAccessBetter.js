@@ -94,6 +94,7 @@ function startGSingIn() {
                 console.log('init');
                 auth2 = gapi.auth2.getAuthInstance();
                 auth2.currentUser.listen(userChanged);
+                console.log(auth2.currentUser);
                 auth2.isSignedIn.listen(updateSignIn);
                 auth2.then(updateSignIn); //tiez po inicializacii (later after initialisation)
             });
