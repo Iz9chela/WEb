@@ -39,7 +39,7 @@ function userChanged(user){
 
 
     const userInfoElm = document.getElementById("userStatus");
-    const userNameInputElm = document.getElementById("name");
+    const userNameInputElm = document.getElementById("fname");
 if (userNameInputElm){// pre 82GoogleAccessBetterAddArt.html
             userNameInputElm.value=user.getBasicProfile().getName();
     }
@@ -62,7 +62,7 @@ function updateSignIn() {
     }
 
     const userInfoElm = document.getElementById("userStatus");
-    const userNameInputElm = document.getElementById("name");
+    const userNameInputElm = document.getElementById("fname");
 if (userNameInputElm){// pre/for 82GoogleAccessBetterAddArt.html
         if (sgnd) {
             userNameInputElm.value=auth2.currentUser.get().getBasicProfile().getName();
