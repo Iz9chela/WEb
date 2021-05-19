@@ -1,7 +1,7 @@
 /*
  * Created by Stefan Korecko, 2020
+ * Parametric client side hash router
  */
-
 
 export default class ParamHashRouter {
   constructor(routes,inithash) {

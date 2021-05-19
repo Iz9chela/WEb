@@ -1,215 +1,325 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="author" content="Ihor Kasatkin" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/mafile.css"/>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="35008918199-ojhae8aukfs426q08mk91s3egf2hffi4.apps.googleusercontent.com">
-    <!-- <link rel="stylesheet"  href="css/treesBlog.css" media="screen"/> -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Stefan Korecko" />
+		<link rel="stylesheet" href="css/normalize.css" />
+		<!-- <link rel="stylesheet" href="css/mafile.css"/> -->
+		<link rel="stylesheet" href="css/treesBlog.css" media="screen" />
+		<link rel="stylesheet" href="css/mafile.css"/>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="35008918199-ojhae8aukfs426q08mk91s3egf2hffi4.apps.googleusercontent.com">
+
+		<title>My Blog about Trees and Other Things</title>
+	</head>
+
+	<body>
+		<header>
+			<h1>My Blog about Trees and Other Things</h1>
+
+			<div class="menu">
+				<button id="menuTitle">Menu</button>
+
+				<nav id="menuIts" class="menu mnHide">
+					<a href="#welcome">Welcome!</a>
+					<a href="#articles">Articles</a>
+					<a href="#opinions">Visitor opinions</a>
+					<a href="#addOpinion">Add your opinion</a>
+				</nav>
+			</div>
+		</header>
+
+		<main id="router-view"></main>
+
+		<footer>Ján ŠK. Trieska (c) 2018-21</footer>
+
+		<!--Templates for html, dynamically inserted by the router -->
+
+		<script id="template-welcome" type="text/template">
+			<article>
+			    <h2>Welcome!</h2>
+
+			    <p>
+			        Welcome to my page. My name is <b>Ihor Kasatkin</b>.
+          		  	In this article im gonna introduce you <i>"The influence of PC on human life"</i>.<br>
+           			In my blog, I'll tell you <i>"How the computer changed the life of a modern person"</i>.<br>
+           			I will also try to uncover <i>"Problems that could present while working on a PC"</i>.<br>
+            		And I'll end by telling about <i>"The benefits and harms of a computer in human life"</i>.<br>
+			    </p>
+			</article>
+		</script>
+
+		<script id="template-articles" type="text/template">
+			{{#articles}}
+			<article>
+			    <h2><a href="{{detailLink}}">{{title}}</a></h2>
+			    <p>
+			        by {{author}}
+			    </p>
+			</article>
+			{{/articles}}
+
+			<a href="#artInsert" class="linkAsButton">Create new aticle!</a>    <!--added-->
+
+			<footer><a href="#menuTitle" class="linkAsButton">Up to the menu</a></footer>
+		</script>
+
+		<script id="template-articles-error" type="text/template">
+
+			<article>
+			    <h2>Article(s) acquisition failed</h2>
+			    <p>
+			        {{errMessage}}
+			    </p>
+			</article>
+			<footer><a href="#menuTitle" class="linkAsButton">Up to the menu</a></footer>
+		</script>
+
+		<script id="template-opinions" type="text/template">
+			<article  id="artOpinions">
+				<h2>Visitor Opinions</h2>
+				{{#.}}
+				<section class = "sectionIndex">
+					<h3>{{name}} <i>{{created}}</i></h3>
+					<img class="url" src="{{url}}" alt="url">
+					<p>{{email}}</p>
+					<p>{{radio}}</p>
+					<p>{{option}}</p>
+					<p>{{datalist}}</p>
+					<p>{{checkbox}}</p>
+					<p>{{opinion}}</p>
+				</section>
+				{{/.}}
+				{{^.}}
+				<section>
+					Sorry, no opinions found.
+				</section>
+				{{/.}}
+				<footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
+			</article>
+			<footer><a href="#menuTitle" class="linkAsButton">Up to the menu</a></footer>
+		</script>
+
+		<script id="template-addOpinion" type="text/template">
+			<article  id="artOpnFrm">
+				<form id="form4Index">
+					<h1>
+					  Your Opinion
+					</h1>
+					<p class = "indexP">
+					  Please, use the form below to state your opinion about this page.
+					</p>
+					
+					<!-- text-->
+					<label for="fname" class="required">Your name:</label><br>
+					<input type="text" id="fname" name="fname" required><br>
+					<label for="email" class="required">Your email:</label><br>
+					<input type="email" id="email" name="email" required><br>
+					<label for="url">Set your picture:</label><br>
+					<input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" size="30"><br>
+					
+					 <!-- radio buttons-->
+					<!-- <label for="radio">Select your gender:</label><br> -->
+					<p>Select your gender: </p>
+					<input type="radio" id="male" name="gender" value="male">
+					<label for="male">Male</label>
+					<input type="radio" id="female" name="gender" value="female">
+					<label for="female">Female</label>
+					<input type="radio" id="other" name="gender" value="other">
+					<label for="other">Other</label><br><br>
+				  
+					 <!-- Option-->
+				  <label for="Person">Age & stage</label>
+				  <select id="Person" name="stage">
+					  <option value="">--Please choose one--</option>
+					  <option value="Toddler">Toddler</option>
+					  <option value="Kid">Kid</option>
+					  <option value="Preschool">Preschool</option>
+					  <option value="Teenager">Teenager</option>
+					  <option value="Gradeschooler">Gradeschooler</option>
+					  <option value="Adult">Adult</option>
+				  </select><br><br>
+				  
+				  <!-- Datalist-->
+				  <label for="country-select">Choose a country:</label>
+				  <input list="theme-choose" id="country-select" name="country-select" />
+				  <datalist id="theme-choose">
+					  <option value="Slovakia">
+					  <option value="Ukraine">
+					  <option value="USA">
+					  <option value="Germany">
+					  <option value="China">
+					  <option value="Japan"></option>
+				  </datalist><br>
+					
+					
+					<!-- textArea-->
+					<label for="opinion" class="required">Write your opinion:</label><br>
+					<textarea id="opinion" name="opinion" rows="7" cols="44" placeholder="Express your opinion here ..." required> </textarea><br>
+				  
+					<!-- checkbox-->
+					<div class="checkboxforIndex">
+					<input type="checkbox" id="willReturnElm" name="willReturnElm" />
+					<label for="willReturnElm">I will definitely return to this page.</label>
+					<br><br>
+					</div>
+				  
+					<!-- Submit + Reset button-->
+					<input type="submit" value="Submit">
+					<input type="reset" value="Reset"><br>
+				   
+				  
+				  </form>
+
+			</article>
+			<footer><a href="#menuTitle" class="linkAsButton">Up to the menu</a></footer>
+		</script>
+
+		<script id="template-article" type="text/template">
+			<article id ="artId">
+			    <h3>{{title}}</h3>
+			    <p>
+			        by {{author}}
+			    </p>
+			    {{#imageLink}}
+			    <figure>
+			        <img src="{{imageLink}}" alt="article figure" />
+			    </figure>
+			    {{/imageLink}}
+			    <div>{{{content}}}</div>
+			    <p>
+			        Keywords:
+			        {{tags}}
+			    </p>
+
+			    <!-- <h5> Comments </h5>
+			    <ul>
+			        {{#comments}}
+			        <li>{{{text}}}</li>
+			        {{/comments}}
+			    </ul> -->
+
+			</article>
+
+			<footer>
+			    <a href="{{backLink}}" class="linkAsButton"><< Back</a>
+			    <a href="{{editLink}}" class="linkAsButton">Edit</a>
+			    <a href="{{deleteLink}}" class="linkAsButton">Delete</a>
+			    <!-- <a href="#menuTitle" class="linkAsButton">Up to the menu</a> -->
+			</footer>
+		</script>
+
+		<script id="template-article-form" type="text/template">
+			    <article>
+			        <h2>{{formTitle}}</h2> <br><br>
+
+			        <form id="articleForm">
+			            <label for="author">Author:</label>
+			            <input type="text" name="author" id="author" value="{{author}}" size="50"
+			                   title="Article author, max. length 100 characters."
+			                   maxlength="100" placeholder="e.g. Ján Trieska" />
+			            <br>
+			            <label for="title">Title:</label>
+			            <input type="text" name="title" id="title" value="{{title}}" size="50"
+			                   maxlength="100" pattern="\S[\S\s]*" placeholder="e.g. My story." required
+			                   title="Article title, mandatory item, max. length: 100 characters.
+			The first character must not be a space."  />
+			            <br>
+			            <label for="imageLink">Image (url):</label>
+			            <input type="url" name="imageLink" id="imageLink" value="{{imageLink}}" size="50"
+			                   title="Image URL, max. length 100 characters." maxlength="100"/>
+			            <br>
+			            <label></label>
+			            <button type="button" id="btShowFileUpload">
+			                Upload image
+			            </button>
+
+			            <fieldset class="added hiddenElm" id="fsetFileUpload">
+			                <legend>Image Upload</legend>
+			                <input type="file" id="flElm" name="file" accept="image/jpeg, image/png"/>
+			                <br />
+			                <button type="button" id="btFileUpload">
+			                    Send image to server </button>
+			                <button type="button" id="btCancelFileUpload">
+			                    Cancel uploading </button>
+			            </fieldset>
 
 
-    <title>The influence of PC on human life</title>
-</head>
+			            <br>
+			            <label for="content">Article content:</label>
+			            <textarea
+			                    name="content" id="content" spellcheck="true" lang="sk"
+			                    cols="50" rows="20" required
+			                    title="Article content, mandatory item, can be plain text or in HTML.">
+			              {{content}}
+			            </textarea>
+			            <br>
+			            <label for="tags">Keywords:</label>
+			            <input  type="text" name="tags" id="tags" value="{{tags}}" size="50"
+			                    title="Keyword list, comma separated." placeholder="e.g. village, drama" />
+			            <br> <br>
+			            <button type="reset"> Reset Form </button>
+			            <button type="submit"> {{submitBtTitle}} </button>
 
-<body>
-<header>
-    <div class="backgroundIndex">
-        <h1>The influence of PC on human life</h1>
-    </div>
-    
+			        </form>
+			    </article>
 
-<div class="menu">
-    <button id="menuTitle">Menu</button>
+			    <footer>
+			        <a href="{{backLink}}" class="linkAsButton"><< Back</a>
+			        <!-- <a href="#menuTitle" class="linkAsButton">Up to the menu</a> -->
+			    </footer>
+		</script>
 
-    <nav id="menuIts" class="menu mnHide">
-            <a href="#welcome">Welcome!</a>
-            <a href="#articles">Articles</a>
-            <a href="#opinions">Visitor opinions</a>
-            <a href="#addOpinion">Add your opinion</a>
-    </nav>
-
-</div>
-
-</header>
-
-<main id="router-view">
-</main>
-
-
-
-
-<!--Templates for html, dynamically inserted by the router -->
-
-<script id="template-welcome" type="text/template">
-    <article class = "template-welcome">
-        <h2>Welcome!</h2>
-        <p>
-            Welcome to my page. My name is <b>Ihor Kasatkin</b>.
-            In this article im gonna introduce you <i>"The influence of PC on human life"</i>.<br>
-            In my blog, I'll tell you <i>"How the computer changed the life of a modern person"</i>.<br>
-            I will also try to uncover <i>"Problems that could present while working on a PC"</i>.<br>
-            And I'll end by telling about <i>"The benefits and harms of a computer in human life"</i>.<br>
-        </p>
-    </article>
-</script>
-
-<script id="template-articles" type="text/template">
-    <!-- <div id="main">
-    <nav>
-        {{#prevPage}}
-        <a href="#main/{{prevPage}}/{{pageCount}}"><< Previous page</a>
-        {{/prevPage}}
-        {{#nextPage}}
-        <a href="#main/{{nextPage}}/{{pageCount}}">Next page >></a>
-        {{/nextPage}}
-    </nav> -->
-</div>
-    <div id="articles">
-    {{#.}}
-    <article>
-        <h2>{{title}}</h2>
-        <p>
-        {{content}}
-        </p>
-        <p>
-        by {{author}}
-        </p>
-    </article>
-    {{/.}}
-</div>
-    <footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
-</script>
+		<script id="template-insertArticle" type="text/template">
+			<article  id="artAdd">
+			    <h2>New article</h2>
+			    <p>
+			        Please, use the form below to create your article.
+			    </p>
+			    <form id="articleForm">
+			        <label for="author">Author:</label>
+			        <input type="text" name="author" id="author" size="50" title="Autor článku, maximálna dĺžka: 100 znakov (article author, max. length 100 characters)." maxlength="100" placeholder="Write here!!!" />
+			        <br>
+			        <label for="title">Title:</label>
+			        <input type="text" name="title" id="title" size="50"  maxlength="100" pattern="\S[\S\s]*" required title="Názov článku, povinná položka, maximálna dĺžka: 100 znakov, prvý znak nesmie byť medzera (Article title, mandatory item, max. length: 100 characters, the first character must not be a space)." placeholder="Write here!!!" />
 
 
-<!-- <script id="template-main" type="text/template">
-    <h2>Main Content</h2>
-    <p>
-        Displaying page {{currPage}} of {{pageCount}} pages.
-    </p>
-    <nav>
-        {{#prevPage}}
-        <a href="#main/{{prevPage}}/{{pageCount}}"><< Previous page</a>
-        {{/prevPage}}
-        {{#nextPage}}
-        <a href="#main/{{nextPage}}/{{pageCount}}">Next page >></a>
-        {{/nextPage}}
-    </nav>
-</script> -->
+			        <br>
+			        <label for="imageLink">Image (url):</label>
+			        <input type="url" name="imageLink" id="imageLink" size="50" title="URL obrázka. Maximálna dĺžka: 100 znakov (image URL, max. length 100 characters)." maxlength="100"/>
+			        <br>
+			        <label></label><button type="button" id="btShowFileUpload">Upload image</button>
 
-<script id="template-articles-error" type="text/template">
-
-    <article>
-        <h2>Articles acquisition failed</h2>
-        <p>
-            {{errMessage}}
-        </p>
-    </article>
-    <footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
-
-</script>
-
-<script id="template-opinions" type="text/template">
-    <article  id="artOpinions">
-        <h2>Visitor Opinions</h2>
-        {{#.}}
-        <section class = "sectionIndex">
-            <h3>{{name}} <i>{{created}}</i></h3>
-            <img class="url" src="{{url}}" alt="url">
-            <p>{{email}}</p>
-            <p>{{radio}}</p>
-            <p>{{option}}</p>
-            <p>{{datalist}}</p>
-            <p>{{checkbox}}</p>
-            <p>{{opinion}}</p>
-        </section>
-        {{/.}}
-        {{^.}}
-        <section>
-            Sorry, no opinions found.
-        </section>
-        {{/.}}
-        <footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
-    </article>
-</script>
+			            <fieldset class="added hiddenElm" id="fsetFileUpload">
+			                <legend>Image Upload</legend>
+			                <input type="file" id="flElm" name="file" accept="image/jpeg, image/png"/>
+			                <br />
+			                <button type="button" id="btFileUpload">Send image to server</button>
+			                <button type="button" id="btCancelFileUpload">Cancel uploading</button>
+			            </fieldset>
 
 
-<script id="template-addOpinion" type="text/template">
-    <article  id="artOpnFrm">
-        <form id="form4Index">
-            <h1>
-              Your Opinion
-            </h1>
-            <p class = "indexP">
-              Please, use the form below to state your opinion about this page.
-            </p>
-            
-            <!-- text-->
-            <label for="fname" class="required">Your name:</label><br>
-            <input type="text" id="fname" name="fname" required><br>
-            <label for="email" class="required">Your email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="url">Set your picture:</label><br>
-            <input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" size="30"><br>
-            
-             <!-- radio buttons-->
-            <!-- <label for="radio">Select your gender:</label><br> -->
-            <p>Select your gender: </p>
-            <input type="radio" id="male" name="gender" value="male">
-            <label for="male">Male</label>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label>
-            <input type="radio" id="other" name="gender" value="other">
-            <label for="other">Other</label><br><br>
-          
-             <!-- Option-->
-          <label for="Person">Age & stage</label>
-          <select id="Person" name="stage">
-              <option value="">--Please choose one--</option>
-              <option value="Toddler">Toddler</option>
-              <option value="Kid">Kid</option>
-              <option value="Preschool">Preschool</option>
-              <option value="Teenager">Teenager</option>
-              <option value="Gradeschooler">Gradeschooler</option>
-              <option value="Adult">Adult</option>
-          </select><br><br>
-          
-          <!-- Datalist-->
-          <label for="country-select">Choose a country:</label>
-          <input list="theme-choose" id="country-select" name="country-select" />
-          <datalist id="theme-choose">
-              <option value="Slovakia">
-              <option value="Ukraine">
-              <option value="USA">
-              <option value="Germany">
-              <option value="China">
-              <option value="Japan"></option>
-          </datalist><br>
-            
-            
-            <!-- textArea-->
-            <label for="opinion" class="required">Write your opinion:</label><br>
-            <textarea id="opinion" name="opinion" rows="7" cols="44" placeholder="Express your opinion here ..." required> </textarea><br>
-          
-            <!-- checkbox-->
-            <div class="checkboxforIndex">
-            <input type="checkbox" id="willReturnElm" name="willReturnElm" />
-            <label for="willReturnElm">I will definitely return to this page.</label>
-            <br><br>
-            </div>
-          
-            <!-- Submit + Reset button-->
-            <input type="submit" value="Submit">
-            <input type="reset" value="Reset"><br>
-           
-          
-          </form>
-        <footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
-    </article>
-</script> 
+			        <br>
+			        <label for="content">Article content:</label>
+			        <textarea name="content" id="content" spellcheck="true" lang="sk" cols="50" rows="20" required title="Obsah článku, povinná položka,  môže byť obyčajný text alebo html (Article content, mandatory item, can be plain text or in HTML)."></textarea>
+			        <br>
+			        <label for="tags">Keywords:</label>
+			        <input type="text" name="tags" id="tags" size="50" title="Zoznam kľúčových slov oddelených čiarkou (Keyword list, comma separated)." placeholder="Write here!!!" />
 
-<!------------------------------------------------------------------------>
+			        <br>
+			        <br>
+			        <button type="reset">
+			            Reset
+			        </button>
+			        <button type="submit">
+			            Add article
+			        </button>
+
+			    </form>
+			    <footer  class="menuLink"><a href="#welcome">Back to the menu</a></footer>
+			</article>
+		</script>
+		<!------------------------------------------------------------------------>
 <aside id="googleSignIn">
     <div id="SignInButton"></div>
     <div id="SignedIn">
@@ -230,14 +340,10 @@
 <script src="js/82GoogleAccessBetter.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=startGSingIn" async defer></script>
 <!------------------------------------------------------------------------>
+		<!--JavaScript -->
+		<script type="module" src="js/index.js"></script>
+		<script src="js/articleFormsHandler.js"></script>
 
-<!--JavaScript code, inserted as a module-->
-<script  type="module" src="js/index.js"></script>
-
-<footer>
-    Ihor kasatkin <br>
-    2021
-</footer>
-
-</body>
+		<script src="js/addOpinion.js"></script>
+	</body>
 </html>

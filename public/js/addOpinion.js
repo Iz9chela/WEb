@@ -1,7 +1,5 @@
-import Mustache from './mustache.js';
-
-export default function processOpnFrmData(event){
-    //1.prevent normal event (form sending) processing
+export default function processOpnFrmData(event) {
+	//1.prevent normal event (form sending) processing
     event.preventDefault();
 
     //2. Read and adjust data from the form (here we remove white spaces before and after the strings)
@@ -36,19 +34,22 @@ export default function processOpnFrmData(event){
 
     console.log("New opinion:\n "+JSON.stringify(newOpinion));
 
+	const request = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-Parse-Application-Id': 'VFdVT83jOBJj17B4r1TrpaiUllgCYXkBh4XQEOiO',
+			'X-Parse-REST-API-Key': 'kGvUqi793R22kDWJMhFyfk6SMPrmeuVBQggN4G05',
+		},
+		body: JSON.stringify(newOpinion),
+	};
 
-    let opinions = [];
+	const url = 'https://parseapi.back4app.com/classes/App';
 
-    if(localStorage.commentsStorage){
-        opinions=JSON.parse(localStorage.commentsStorage);//peredau dannie
-    }
+	fetch(url, request).then((response) => {
+		console.log(response);
+	});
 
-    opinions.push(newOpinion);//peredau v newopinion
-    localStorage.commentsStorage = JSON.stringify(opinions);//dannie json v string
-
-
-    //5. Go to the opinions
-    window.location.hash="#opinions";
-    //stranica ne reboot
-
+	//5. Go to the opinions
+	window.location.hash = '#opinions';
 }
