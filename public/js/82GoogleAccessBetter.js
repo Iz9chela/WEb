@@ -34,20 +34,20 @@ function signOut() {
     }
 }
 
-// function userChanged(user){
-//     document.getElementById("userName").innerHTML=user.getBasicProfile().getName();
+function userChanged(user){
+    document.getElementById("userName").innerHTML=user.getBasicProfile().getName();
 
 
-//     const userInfoElm = document.getElementById("userStatus");
-//     const userNameInputElm = document.getElementById("fname");
-// if (userNameInputElm){// pre 82GoogleAccessBetterAddArt.html
-//             userNameInputElm.value=user.getBasicProfile().getName();
-//     }
-//     else if(userInfoElm ){// pre/for 82GoogleAccessBetter.html
-//         renderUserInfo(user,"userStatus");
-//     }
+    const userInfoElm = document.getElementById("userStatus");
+    const userNameInputElm = document.getElementById("fname");
+if (userNameInputElm){// pre 82GoogleAccessBetterAddArt.html
+            userNameInputElm.value=user.getBasicProfile().getName();
+    }
+    else if(userInfoElm ){// pre/for 82GoogleAccessBetter.html
+        renderUserInfo(user,"userStatus");
+    }
 
-// }
+}
 
 
 function updateSignIn() {
