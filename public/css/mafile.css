@@ -67,15 +67,6 @@ body{
     text-align: center;
 }
 
-#menuIts{
-    display: block;
-    text-align: center;
-    margin-left: 40px;
-    margin-right: 40px;
-    font-family: Calibri, sans-serif;/*Шрифт*/
-    font-size: 30px;/*размер букв*/
-    color:black;/*Задать цвет*/
-}
 
 #form4Index{
     display: block;
@@ -196,11 +187,9 @@ label.required:after
     display: flex;
     justify-content: center;
 }
-
-#menuTitle{
-    display: none;
-    visibility: hidden;
-  }
+menu{
+    display: block;
+}
 
 #newID{
     text-align: center;
