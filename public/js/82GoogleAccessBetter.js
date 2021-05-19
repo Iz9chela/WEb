@@ -59,6 +59,10 @@ function updateSignIn() {
         document.getElementById("SignInButton").classList.add("hiddenElm");
         document.getElementById("SignedIn").classList.remove("hiddenElm");
         document.getElementById("userName").innerHTML=auth2.currentUser.get().getBasicProfile().getName();
+        if (window.location.hash.split('/')[0] === '#article') {
+            document.getElementById('comment_author').value
+                = auth2.currentUser.get().getBasicProfile().getName();
+        }
     }else{
         document.getElementById("SignInButton").classList.remove("hiddenElm");
         document.getElementById("SignedIn").classList.add("hiddenElm");
@@ -97,12 +101,9 @@ function startGSingIn() {
                 console.log('init');
                 auth2 = gapi.auth2.getAuthInstance();
                 auth2.currentUser.listen(userChanged);
-                console.log(auth2.currentUser);
                 auth2.isSignedIn.listen(updateSignIn);
                 auth2.then(updateSignIn); //tiez po inicializacii (later after initialisation)
-                if (window.location.hash.split('/')[0] === '#article') {
-                    document.getElementById('comment_author').value = '';
-                }
+                
             });
     });
 
