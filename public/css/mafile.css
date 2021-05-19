@@ -27,6 +27,16 @@ body{
     text-align: center;
 }
 
+#menuIts{
+    display: block;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-family: Calibri, sans-serif;/*Шрифт*/
+    font-size: 30px;/*размер букв*/
+    color:black;/*Задать цвет*/
+  }
+
 .backgroundIndex{
     background-image: url("../fig/NH.jpg");
     padding-top: 20%;
