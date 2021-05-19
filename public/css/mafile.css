@@ -197,6 +197,11 @@ label.required:after
     justify-content: center;
 }
 
+#menuTitle{
+    display: none;
+    visibility: hidden;
+  }
+
 #newID{
     text-align: center;
 }
