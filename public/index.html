@@ -17,22 +17,22 @@
 			<div class="backgroundIndex">
 				<h1>The influence of PC on human life</h1>
 			</div>
-			
-		
+
+
 		<div class="menu">
 			<button id="menuTitle">Menu</button>
-		
+
 			<nav>
 					<a href="#welcome">Welcome!</a>
 					<a href="#articles">Articles</a>
 					<a href="#opinions">Visitor opinions</a>
 					<a href="#addOpinion">Add your opinion</a>
 			</nav>
-		
+
 		</div>
-		
+
 		</header>
-		
+
 		<main id="router-view">
 		</main>
 
@@ -62,14 +62,6 @@
 			</article>
 			{{/articles}}
 
-
-			<h5> Comments </h5>
-			<ul>
-				{{#comments}}
-				<li>{{{text}}}</li>
-				{{/comments}}
-			</ul>
-	
 			<a href="#artInsert" class="linkAsButton">Create new aticle!</a>    <!--added-->
 
 			<footer><a href="#menuTitle" class="linkAsButton">Up to the menu</a></footer>
@@ -120,7 +112,7 @@
 					<p class = "indexP">
 					  Please, use the form below to state your opinion about this page.
 					</p>
-					
+
 					<!-- text-->
 					<label for="fname" class="required">Your name:</label><br>
 					<input type="text" id="fname" name="fname" required><br>
@@ -128,7 +120,7 @@
 					<input type="email" id="email" name="email" required><br>
 					<label for="url">Set your picture:</label><br>
 					<input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" size="30"><br>
-					
+
 					 <!-- radio buttons-->
 					<!-- <label for="radio">Select your gender:</label><br> -->
 					<p>Select your gender: </p>
@@ -138,7 +130,7 @@
 					<label for="female">Female</label>
 					<input type="radio" id="other" name="gender" value="other">
 					<label for="other">Other</label><br><br>
-				  
+
 					 <!-- Option-->
 				  <label for="Person">Age & stage</label>
 				  <select id="Person" name="stage">
@@ -150,7 +142,7 @@
 					  <option value="Gradeschooler">Gradeschooler</option>
 					  <option value="Adult">Adult</option>
 				  </select><br><br>
-				  
+
 				  <!-- Datalist-->
 				  <label for="country-select">Choose a country:</label>
 				  <input list="theme-choose" id="country-select" name="country-select" />
@@ -162,24 +154,24 @@
 					  <option value="China">
 					  <option value="Japan"></option>
 				  </datalist><br>
-					
-					
+
+
 					<!-- textArea-->
 					<label for="opinion" class="required">Write your opinion:</label><br>
 					<textarea id="opinion" name="opinion" rows="7" cols="44" placeholder="Express your opinion here ..." required> </textarea><br>
-				  
+
 					<!-- checkbox-->
 					<div class="checkboxforIndex">
 					<input type="checkbox" id="willReturnElm" name="willReturnElm" />
 					<label for="willReturnElm">I will definitely return to this page.</label>
 					<br><br>
 					</div>
-				  
+
 					<!-- Submit + Reset button-->
 					<input type="submit" value="Submit">
 					<input type="reset" value="Reset"><br>
-				   
-				  
+
+
 				  </form>
 
 			</article>
@@ -203,12 +195,26 @@
 			        {{tags}}
 			    </p>
 
-			    <!-- <h5> Comments </h5>
-			    <ul>
+			    <h5> Comments </h5>
+			    <ul id="comment-section">
 			        {{#comments}}
+              		<p>
+    			        by {{author}}
+    			    </p>
+
 			        <li>{{{text}}}</li>
 			        {{/comments}}
-			    </ul> -->
+
+				</ul>
+				<br>
+
+				<input type="text" id="comment_author"/>
+				<br>
+				<input type="text" id="comment_text"/>
+				<br>
+				<button type="button" id="add_comment">
+					Add comment
+				</button>
 
 			</article>
 
