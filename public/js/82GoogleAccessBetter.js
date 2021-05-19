@@ -28,6 +28,9 @@ function renderLogOutInfo(htmlElmId) {
 function signOut() {
     if(auth2.signOut){
         auth2.signOut();
+        if (window.location.hash.split('/')[0] === 'article') {
+            document.getElementById('comment_author').value = '';
+        }
     }
     if(auth2.disconnect){
         auth2.disconnect();
