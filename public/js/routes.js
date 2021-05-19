@@ -260,13 +260,11 @@ function fetchAndProcessArticle(
 
                     if(auth2.isSignedIn.get()) {
                         document.getElementById('comment_author').value
-                            = auth2.currentUser.get().getBasicProfile().getName();
+                            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
                     }
 
                     document.getElementById('add_comment').onclick = () => {
-                        addComment(artIdFromHash,
-                            offsetFromHash,
-                            totalCountFromHash);
+                        addComment(artIdFromHash);
                     }
 
                 });
@@ -347,11 +345,7 @@ function deleteArticle(outputEmlId, artIdFromHash) {
 }
 
 
-function addComment(artIdFromHash,
-                    offsetFromHash,
-                    totalCountFromHash) {
-
-
+function addComment(artIdFromHash) {
 
     const commentAuthor
         = document.getElementById('comment_author').value.trim();

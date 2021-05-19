@@ -28,7 +28,7 @@ function renderLogOutInfo(htmlElmId) {
 function signOut() {
     if(auth2.signOut){
         auth2.signOut();
-        if (window.location.hash.split('/')[0] === '#article') {
+        if (window.location.hash.split('/')[0] === '#article') {//if posle # idet article,nahodim pole cimment_autohor i tuda vstavlaem empty string
             document.getElementById('comment_author').value = '';
         }
     }
@@ -61,7 +61,7 @@ function updateSignIn() {
         document.getElementById("userName").innerHTML=auth2.currentUser.get().getBasicProfile().getName();
         if (window.location.hash.split('/')[0] === '#article') {
             document.getElementById('comment_author').value
-                = auth2.currentUser.get().getBasicProfile().getName();
+                = auth2.currentUser.get().getBasicProfile().getName();//check if na str art ,to dobavlaem name usera
         }
     }else{
         document.getElementById("SignInButton").classList.remove("hiddenElm");
