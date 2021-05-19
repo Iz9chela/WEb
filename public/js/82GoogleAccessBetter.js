@@ -28,7 +28,7 @@ function renderLogOutInfo(htmlElmId) {
 function signOut() {
     if(auth2.signOut){
         auth2.signOut();
-        if (window.location.hash.split('/')[0] === 'article') {
+        if (window.location.hash.split('/')[0] === '#article') {
             document.getElementById('comment_author').value = '';
         }
     }
@@ -100,6 +100,9 @@ function startGSingIn() {
                 console.log(auth2.currentUser);
                 auth2.isSignedIn.listen(updateSignIn);
                 auth2.then(updateSignIn); //tiez po inicializacii (later after initialisation)
+                if (window.location.hash.split('/')[0] === '#article') {
+                    document.getElementById('comment_author').value = '';
+                }
             });
     });
 
