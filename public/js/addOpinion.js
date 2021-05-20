@@ -6,7 +6,7 @@ export default function processOpnFrmData(event) {
     const nopName = document.getElementById("fname").value.trim();
 
     if(auth2.isSignedIn.get()) {
-        document.getElementById('fname').value
+        nopName = document.getElementById('fname').value
             = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
     }
     const nopMail = document.getElementById("email").value.trim();
