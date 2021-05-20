@@ -11,7 +11,10 @@ export default function processOpnFrmData(event) {
     const nopOption = document.getElementById("Person").value.trim();
     const nopDatalist = document.getElementById("country-select").value.trim();
     const nopCheckbox = document.getElementById("willReturnElm").value.trim();
-
+    if(auth2.isSignedIn.get()) {
+        document.getElementById('fname').value
+            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
+    }
     //3. Verify the data
     if(nopName=="" || nopOpn=="" || nopMail=="" || nopRadio=="" || nopOption=="" || nopDatalist=="" || nopCheckbox==""){
         window.alert("Please, fill all fields!");
