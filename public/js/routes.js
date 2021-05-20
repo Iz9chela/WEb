@@ -82,11 +82,6 @@ function createHtml4opinions(targetElm) {
             'X-Parse-REST-API-Key': 'kGvUqi793R22kDWJMhFyfk6SMPrmeuVBQggN4G05',
         },
     };
-    if(auth2.isSignedIn.get()) {
-        document.getElementById('fname').value
-            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
-    }
-
     fetch(url, request)
         .then((response) => {
             return response.json();
