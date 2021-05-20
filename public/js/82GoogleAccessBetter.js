@@ -31,9 +31,9 @@ function signOut() {
         if (window.location.hash.split('/')[0] === '#article') {//if posle # idet article,nahodim pole cimment_autohor i tuda vstavlaem empty string
             document.getElementById('comment_author').value = '';
         }
-        if (window.location.hash.split('/')[0] === '#addOpinion') {//if posle # idet article,nahodim pole cimment_autohor i tuda vstavlaem empty string
-            document.getElementById('fname').value = '';
-        }
+        // if (window.location.hash.split('/')[0] === '#addOpinion') {//if posle # idet article,nahodim pole cimment_autohor i tuda vstavlaem empty string
+        //     document.getElementById('fname').value = '';
+        // }
     }
     if(auth2.disconnect){
         auth2.disconnect();
@@ -66,10 +66,10 @@ function updateSignIn() {
             document.getElementById('comment_author').value
                 = auth2.currentUser.get().getBasicProfile().getName();//check if na str art ,to dobavlaem name usera
         }
-        if (window.location.hash.split('/')[0] === '#addOpinion') {
-            document.getElementById('fname').value
-                = auth2.currentUser.get().getBasicProfile().getName();//check if na str art ,to dobavlaem name usera
-        }
+        // if (window.location.hash.split('/')[0] === '#addOpinion') {
+        //     document.getElementById('fname').value
+        //         = auth2.currentUser.get().getBasicProfile().getName();//check if na str art ,to dobavlaem name usera
+        // }
     }else{
         document.getElementById("SignInButton").classList.remove("hiddenElm");
         document.getElementById("SignedIn").classList.add("hiddenElm");
