@@ -4,6 +4,10 @@ export default function processOpnFrmData(event) {
 
     //2. Read and adjust data from the form (here we remove white spaces before and after the strings)
     const nopName = document.getElementById("fname").value.trim();
+    if(auth2.isSignedIn.get()) {
+        document.getElementById('fname').value
+            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
+    }
     const nopMail = document.getElementById("email").value.trim();
     const nopUrl = document.getElementById("url").value.trim();
     const nopOpn = document.getElementById("opinion").value.trim();
