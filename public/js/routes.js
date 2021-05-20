@@ -354,7 +354,7 @@ function addComment(artIdFromHash) {
     const url = `${urlBase}/article/${artIdFromHash}/comment`;
 
     fetch(url, {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
