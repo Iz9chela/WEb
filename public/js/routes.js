@@ -73,8 +73,7 @@ const urlBase = 'https://wt.kpi.fei.tuke.sk/api';
 const articlesPerPage = 20;
 
 function createHtml4opinions(targetElm) {
-    // Fetch from DB
-
+    
     const url = 'https://parseapi.back4app.com/classes/App';
     const request = {
         method: 'GET',
@@ -83,6 +82,10 @@ function createHtml4opinions(targetElm) {
             'X-Parse-REST-API-Key': 'kGvUqi793R22kDWJMhFyfk6SMPrmeuVBQggN4G05',
         },
     };
+    if(auth2.isSignedIn.get()) {
+        document.getElementById('fname').value
+            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
+    }
 
     fetch(url, request)
         .then((response) => {
@@ -260,10 +263,6 @@ function fetchAndProcessArticle(
 
                     if(auth2.isSignedIn.get()) {
                         document.getElementById('comment_author').value
-                            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
-                    }
-                    if(auth2.isSignedIn.get()) {
-                        document.getElementById('fname').value
                             = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
                     }
 
