@@ -262,6 +262,10 @@ function fetchAndProcessArticle(
                         document.getElementById('comment_author').value
                             = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
                     }
+                    if(auth2.isSignedIn.get()) {
+                        document.getElementById('fname').value
+                            = auth2.currentUser.get().getBasicProfile().getName();//if signin to add v comment author user name
+                    }
 
                     document.getElementById('add_comment').onclick = () => {
                         addComment(artIdFromHash);
